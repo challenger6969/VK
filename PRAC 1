@@ -1,0 +1,16 @@
+AIM:Fitting and plotting of modified exponential curves. 
+
+import numpy as np
+from scipy.optimize import curve_fit import matplotlib.pyplot as plt
+def modifie_exponential(x, a, b, c):
+return a*np.exp(b*x) + c x_data=np.linspace(0,10,50)
+y_data=modifie_exponential(x_data,2,0.5,1)+np.random.normal(0,0.5,50) popt, pcov = curve_fit(modifie_exponential, x_data, y_data)
+print("Fitted parameter:a=%2f,b=%2f, c=%2f"%tuple(popt)) x_plot=np.linspace(0,10,100) y_plot=modifie_exponential(x_plot,*popt) plt.plot(x_data,y_data,'ko',label='data') import numpy as np from scipy.optimize import curve_fit
+import matplotlib.pyplot as plt
+def modifie_exponential(x, a, b, c):
+return a*np.exp(b*x) + c x_data=np.linspace(0,10,50)
+y_data=modifie_exponential(x_data,2,0.5,1)+np.random.normal(0,0.5,50) popt, pcov = curve_fit(modifie_exponential, x_data, y_data)
+print("Fitted parameter:a=%2f,b=%2f, c=%2f"%tuple(popt)) x_plot=np.linspace(0,10,100) y_plot=modifie_exponential(x_plot,*popt) plt.plot(x_data,y_data,'ko',label='data') plt.plot(x_plot,y_plot,'r-',label='fitted curve')
+plt.legend()
+plt.plot(x_plot,y_plot,'r-',label='fitted curve') plt.legend()
+plt.show()
