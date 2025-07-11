@@ -1,0 +1,22 @@
+AIM:Forecasting by short term forecasting methods. 
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+data = pd.read_excel('AirPassengers.xlsx') print(data.head())
+plt.plot(data) plt.xlabel('Year')
+plt.ylabel('Number of Passengers') plt.show()
+ 
+data_series = data['#Passengers']
+plt.plot(data_series) # Use the extracted series for plotting plt.xlabel('Year')
+plt.ylabel('Number of Passengers') plt.show()
+ 
+from statsmodels.tsa.api import SimpleExpSmoothing # Use the extracted series to create the model
+ 
+model = SimpleExpSmoothing(data_series) model_single_fit = model.fit()
+forecast_single = model_single_fit.forecast(6) print(forecast_single)
+ 
+forecast_single = model_single_fit.forecast(40) plt.plot(data['#Passengers'], label='Original Data') plt.plot(model_single_fit.fittedvalues, label='Fitted Values') plt.plot(forecast_single, label='Forecast')
+plt.xlabel('Year') plt.ylabel('Number of Passengers')
+plt.title('Single Exponential Smoothing') plt.legend()
+plt.show()
