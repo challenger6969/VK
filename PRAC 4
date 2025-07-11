@@ -1,0 +1,11 @@
+AIM:Fitting of trend by Moving Average Method. 
+
+import pandas as pd
+data = {
+'Year': [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020],
+'Value': [100, 110, 120, 130, 125, 140, 150, 160, 155, 170, 180]
+}
+df = pd.DataFrame(data) df.set_index('Year', inplace=True) window_size = 3
+df['SMA'] = df['Value'].rolling(window=window_size, center=True).mean() print("Yearly Data with Moving Average (SMA):")
+print(df)
+df['Residual'] = df['Value'] - df['SMA'] print("\nResiduals (Original Data - Moving Average):") print(df[['Value', 'SMA', 'Residual']])
