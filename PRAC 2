@@ -1,0 +1,22 @@
+AIM:Fitting and plotting of Gompertz curve. 
+
+import numpy as np
+import numpy as np
+from scipy.optimize import curve_fit import matplotlib.pyplot as plt
+
+def gompertz(t, a, b, c):
+return a * np.exp(-b * np.exp(-c * t))
+
+t = np.linspace(0, 10, 100)
+y = gompertz(t, 100, 0.5, 0.1) + np.random.normal(0, 10, 100)
+
+# Fit the Gompertz curve to the data
+popt, pcov = curve_fit(gompertz, t, y, p0=[100, 0.5, 0.1])
+
+# Print the fitted parameters print("Fitted parameters:") print("a =", popt[0])
+print("b =", popt[1])
+print("c =", popt[2])
+
+# Plot the data and the fitted curve plt.plot(t, y, 'ko', label="Data")
+plt.plot(t, gompertz(t, *popt), 'r-', label="Fitted curve") plt.legend()
+plt.xlabel("Time") plt.ylabel("Value") plt.show()
