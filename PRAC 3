@@ -1,0 +1,18 @@
+AIM:Fitting and plotting of logistic curves. 
+
+def logistic(t, a, b, c):
+return a / (1 + np.exp(-b * (t - c)))
+
+# Generate some sample data t = np.linspace(0, 10, 100)
+y = logistic(t, 100, 1, 5) + np.random.normal(0, 10, 100)
+
+# Fit the logistic curve to the data
+popt, pcov = curve_fit(logistic, t, y, p0=[100, 1, 5])
+
+# Print the fitted parameters print("Fitted parameters:") print("a =", popt[0])
+print("b =", popt[1])
+print("c =", popt[2])
+
+# Plot the data and the fitted curve plt.plot(t, y, 'ko', label="Data")
+plt.plot(t, logistic(t, *popt), 'r-', label="Fitted curve") plt.legend()
+plt.xlabel("Time") plt.ylabel("Value") plt.show()
