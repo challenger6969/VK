@@ -1,0 +1,14 @@
+AIM:Measurement of seasonal indices Link Relative method.
+
+import pandas as pd import numpy as np data = {
+'Year': [2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015,
+2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016],
+'Month': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] * 2,
+'Value': [210, 220, 230, 250, 260, 280, 300, 310, 290, 275, 260, 250,
+215, 225, 235, 255, 265, 285, 305, 315, 295, 280, 265, 255]
+}
+
+df = pd.DataFrame(data)
+df['Link_Relative'] = df['Value'].pct_change() + 1 seasonal_indices = df.groupby('Month')['Link_Relative'].mean()
+seasonal_indices = seasonal_indices / seasonal_indices.sum() * 100 print("Seasonal Indices (Link Relative Method):") print(seasonal_indices)
+df['Seasonal_Index'] = df['Month'].map(seasonal_indices) print("\nFull DataFrame with Seasonal Indices:") print(df)
