@@ -1,0 +1,14 @@
+AIM:Forecasting by exponential smoothing. 
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from statsmodels.tsa.holtwinters import SimpleExpSmoothing # Generate synthetic data (constant with slight noise) np.random.seed(42)
+time = np.arange(30)
+data = 10 + np.random.normal(scale=0.5, size=len(time)) # Apply Simple Exponential Smoothing
+model = SimpleExpSmoothing(data)
+fit = model.fit(smoothing_level=0.5, optimized=False) smoothed = fit.fittedvalues
+# Plot the data and smoothed values plt.figure(figsize=(10, 6))
+plt.plot(time, data, label="Original Data", marker="o") plt.plot(time, smoothed, label="SES Smoothed", color="red") plt.title("Simple Exponential Smoothing")
+plt.xlabel("Time") plt.ylabel("Value") plt.legend()
+plt.savefig("SES_example.png") plt.show()
